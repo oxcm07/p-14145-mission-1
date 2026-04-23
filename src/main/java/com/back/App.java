@@ -7,6 +7,7 @@ public class App {
     int lastId = 0;
     WiseSaying[] wiseSayings = new WiseSaying[100];
     int wiseSayingsLastIndex = -1;
+    int findex = -1;
 
     void run() {
         System.out.println("== 명언 앱 ==");
@@ -67,11 +68,11 @@ public class App {
         int deletedIndex = delete(id);
 
         if (deletedIndex == -1) {
-            System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
+            System.out.printf("%d번 명언은 존재하지 않습니다.%n", id);
             return;
         }
 
-        System.out.println("%d번 명언이 제외되었습니다".formatted(id));
+        System.out.printf("%d번 명언이 제외되었습니다%n", id);
     }
 
     void actionChange(String cmd) {
@@ -84,7 +85,7 @@ public class App {
         WiseSaying wiseSaying = findId(id);
 
         if (wiseSaying == null) {
-            System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
+            System.out.printf("%d번 명언은 존재하지 않습니다.%n", id);
             return;
         }
         System.out.printf("명언(기존) : %s\n", wiseSaying.content);
@@ -113,12 +114,8 @@ public class App {
         return wiseSaying;
     }
 
-    int getSize() {
-        return wiseSayingsLastIndex + 1;
-    }
-
     WiseSaying[] findForList() {
-        WiseSaying[] forListWiseSayings = new WiseSaying[getSize()];
+        WiseSaying[] forListWiseSayings = new WiseSaying[wiseSayingsLastIndex + 1];
 
         int forListWiseSayingsIndex = -1;
 
@@ -130,20 +127,17 @@ public class App {
     }
 
     WiseSaying findId(int id) {
-        int index = findIndexId(id);
+        for (int i = 0; i <= wiseSayingsLastIndex; i++) {
+            if (wiseSayings[i].id == id) {
+                findex = i;
+            }
+        }
+
+        int index = findex;
         if (index == -1) {
             return null;
         }
         return wiseSayings[index];
-    }
-
-    int findIndexId(int id) {
-        for (int i = 0; i <= wiseSayingsLastIndex; i++) {
-            if (wiseSayings[i].id == id) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     void change(WiseSaying wiseSaying, String content, String author) {
@@ -152,7 +146,7 @@ public class App {
     }
 
     int delete(int id) {
-        int deleteIndex = findIndexId(id);
+        int deleteIndex = findex + 2;
 
         if (deleteIndex == -1) {
             return deleteIndex;
