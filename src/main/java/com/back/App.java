@@ -96,7 +96,8 @@ public class App {
         System.out.print("작가 : ");
         String author = sc.nextLine().trim();
 
-        change(wiseSaying, content, author);
+        wiseSaying.content = content;
+        wiseSaying.author = author;
     }
     //action end
 
@@ -138,11 +139,6 @@ public class App {
             return null;
         }
         return wiseSayings[index];
-    }
-
-    void change(WiseSaying wiseSaying, String content, String author) {
-        wiseSaying.content = content;
-        wiseSaying.author = author;
     }
 
     int delete(int id) {
