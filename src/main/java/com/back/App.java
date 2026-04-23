@@ -7,7 +7,7 @@ public class App {
     int lastId = 0;
     WiseSaying[] wiseSayings = new WiseSaying[100];
     int wiseSayingsLastIndex = -1;
-    int findex = -1;
+    int findIndex = -1;
 
     void run() {
         System.out.println("== 명언 앱 ==");
@@ -130,11 +130,11 @@ public class App {
     WiseSaying findId(int id) {
         for (int i = 0; i <= wiseSayingsLastIndex; i++) {
             if (wiseSayings[i].id == id) {
-                findex = i;
+                findIndex = i;
             }
         }
 
-        int index = findex;
+        int index = findIndex;
         if (index == -1) {
             return null;
         }
@@ -142,7 +142,7 @@ public class App {
     }
 
     int delete(int id) {
-        int deleteIndex = findex + 2;
+        int deleteIndex = findIndex + 2;
 
         if (deleteIndex == -1) {
             return deleteIndex;
